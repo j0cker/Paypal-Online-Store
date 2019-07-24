@@ -100,18 +100,18 @@ if ($status=="COMPLETED") {
    $completado = $sentencia->rowCount();
 
 }else {
-   $mensajePaypal= "<h3>Hay un problema con el pago de paypal</h3>";
+   $mensajePaypal= "<h3>Hay un problema con el pago de paypalc∫∫∫∫∫∫∫∫</h3>";
 }
 
 //echo $mensajePaypal;
 
 ?>
 <div class="jumbotron">
-   <h1 class="display-4">¡Listo!</h1>
-   <hr class="my-4">
-   <p class="lead"><?php echo $mensajePaypal; ?></p>
-   <p>
-      <?php
+    <h1 class="display-4">¡Listo!</h1>
+    <hr class="my-4">
+    <p class="lead"><?php echo $mensajePaypal; ?></p>
+    <p>
+        <?php
       if ($completado>=1) {
 
          $sentencia= $pdo->prepare("SELECT * FROM tblDetalleVenta,tblproductos WHERE tblDetalleVenta.IDproducto=tblproductos.ID AND tblDetalleVenta.IDventa=:ID");
@@ -124,5 +124,26 @@ if ($status=="COMPLETED") {
          print_r($listaProductos);
       }
       ?>
-   </p>
+        <div class="row">
+           <?php foreach ($listaProductos as $producto) {?>
+            <div class="col-3">
+                <div class="card">
+                    <img class="card-img-top" src="<?php echo $producto['imagen'];?>" alt="">
+                    <div class="card-body">
+                        <p class="card-text"><?php echo $producto['nombre'];?></p>
+                        <form action="descargas.php" method="post">
+                           <input type="text" name="IDVENTA" id="" value="<?php echo openssl_encrypt($claveVenta,COD,KEY)?>"> 
+                           <input type="text" name="IDPRODUCTO" id="" value="<?php echo openssl_encrypt($producto['IDproducto'],COD,KEY)?>">
+                           <button class="btn btn-success" type="submit">Descargar</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+           <?php }?>
+        </div>
+
+    </p>
 </div>
+
+<?php include 'templates/pie.php'; ?> 
