@@ -100,7 +100,7 @@ if ($status=="COMPLETED") {
    $completado = $sentencia->rowCount();
 
 }else {
-   $mensajePaypal= "<h3>Hay un problema con el pago de paypalc∫∫∫∫∫∫∫∫</h3>";
+   $mensajePaypal= "<h3>Hay un problema con el pago de paypal</h3>";
 }
 
 //echo $mensajePaypal;
